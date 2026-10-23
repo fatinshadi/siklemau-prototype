@@ -9,7 +9,7 @@ In Telegram, open **@BotFather**, send `/newbot`, and copy the token. Never post
 Get a free key at aistudio.google.com. Without it the bot still works using built-in replies. If AI replies fail, set `GEMINI_MODEL` to the current free model name.
 
 ## 3. Run
-Windows Command Prompt (cmd), in this folder:
+Windows Command Prompts (cmd), in this folder:
 ```
 set BOT_TOKEN=PASTE_TOKEN
 set GEMINI_API_KEY=PASTE_KEY
