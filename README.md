@@ -28,4 +28,9 @@ No diagnosis. Red-flag symptoms are directed to 999 and to a person. Every link 
 Open `index.html` in any browser. No installation or internet connection is needed.
 
 ## Team
-Alpha-5: [add member names and university]
+Alpha-5: 
+1. Fatin Shadi
+2. Melanie Bernard
+3. Charmaine Toh
+4. Shaneryn Samson
+5. Jawa Denis
