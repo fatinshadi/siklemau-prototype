@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SikLemau Prototype</title>
+<style>
+:root{--bg:#f6f8f7;--card:#fff;--tx:#14211c;--mu:#5b6b64;--ac:#0f8a5f;--ac2:#e8f5ef;--wa:#d97706;--rd:#c62828;--bd:#dbe3df;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0e1714;--card:#17231f;--tx:#e8f1ed;--mu:#9bb0a7;--ac:#3ecf9a;--ac2:#14352a;--wa:#f5a524;--rd:#ef5350;--bd:#294039}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0e1714;--card:#17231f;--tx:#e8f1ed;--mu:#9bb0a7;--ac:#3ecf9a;--ac2:#14352a;--wa:#f5a524;--rd:#ef5350;--bd:#294039}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:880px;margin:0 auto;padding:16px}
+h1{font-size:22px;margin:0}.sub{color:var(--mu);margin:2px 0 14px}
+nav{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+nav button,.btn{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:8px 14px;border-radius:999px;font:inherit;cursor:pointer}
+nav button.on,.btn.p{background:var(--ac);color:#fff;border-color:var(--ac)}
+section{display:none}section.on{display:block}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:700px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px}
+.chat{display:flex;flex-direction:column;gap:8px;min-height:300px;max-height:380px;overflow:auto}
+.m{padding:8px 11px;border-radius:12px;max-width:88%;background:var(--ac2)}.m small{display:block;color:var(--mu);font-size:11px}
+.m.s{background:var(--bg);border:1px solid var(--bd)}.m.w{border-left:4px solid var(--wa)}.m.r{border-left:4px solid var(--rd)}.m.g{border-left:4px solid var(--ac)}
+.step{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--bd);color:var(--mu)}
+.dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--bd);flex:none}
+.step.on{color:var(--tx);font-weight:600}.step.on .dot{background:var(--wa);border-color:var(--wa)}.step.done .dot{background:var(--ac);border-color:var(--ac)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.heat{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.cell{border-radius:10px;padding:10px 6px;text-align:center;color:#111;font-weight:600}.cell small{display:block;font-weight:400}
+.bar{height:10px;border-radius:6px;background:var(--bd);overflow:hidden}.bar i{display:block;height:100%;background:var(--ac)}
+.b{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--bd)}
+.note{color:var(--mu);font-size:12px;margin-top:12px}
+</style></head><body><main>
+<h1>🌿 SikLemau</h1>
+<p class="sub">Sik lemau, sik mau lemau. Township health agent prototype.</p>
+<nav id="nav"><button data-t="a" class="on">Check-in Circle</button><button data-t="b">Neighbours</button><button data-t="d">Daily Wellbeing</button><button data-t="c">Township Insights</button></nav>
+
+<section id="a" class="on"><div class="grid">
+<div class="card"><b>Telegram bot view</b><div class="chat" id="chat"></div>
+<div class="row"><button class="btn p" id="run">▶ Run Pak Cik Ahmad demo</button><button class="btn" id="rst">Reset</button></div></div>
+<div class="card"><b>Escalation ladder</b> <span class="sub" id="clk">(time accelerated: 15 min = 3 sec)</span>
+<div id="steps"></div>
+<p class="note">Every contact in the ladder is chosen by the resident and has given consent. SikLemau does not diagnose; red-flag symptoms go to 999.</p></div>
+</div></section>
+
+<section id="b"><div class="card"><b>Neighbour board (opt-in)</b>
+<div id="buddies"></div><p class="note">Names are fictional. Matching uses interests, schedule and language only.</p></div></section>
+
+<section id="d"><div class="card"><b>Eat · Move · Mind</b><p class="sub"><b>Demo only:</b> three sample requests and replies are shown. The real agent accepts any request, typed or by voice, in any of four languages.</p><div class="row"><button class="btn" data-r="eat">🍚 I have RM15 for lunch</button><button class="btn" data-r="move">🚶 I have 15 minutes, no equipment</button><button class="btn" data-r="mind">😮‍💨 I feel stressed, 5 minutes</button></div><div class="chat" id="dout" style="min-height:120px;margin-top:12px"></div><p class="note">These replies are scripted examples, not a limit on what the agent can answer. Nutrition values are estimates. This is not diagnosis or therapy; serious distress or red-flag symptoms are directed to human help and 999.</p></div></section>
+<section id="c"><div class="grid">
+<div class="card"><b>Check-in response by block (synthetic data)</b><p class="sub">Average minutes to reply this week</p><div class="heat" id="heat"></div>
+<p class="note">Anonymised and aggregated; groups under 5 residents are hidden in production.</p></div>
+<div class="card"><b>Recommended actions</b><div id="rec"></div>
+<p class="sub" style="margin-top:12px">Weekly active walkers (synthetic)</p><div id="walk"></div></div>
+</div></section>
+<p class="note">Prototype with synthetic data. Telegram bot, scheduler and agent tools implement the same flow.</p>
+</main>
+<script>
+var $=function(i){return document.getElementById(i)};
+document.querySelectorAll('#nav button').forEach(function(b){b.onclick=function(){
+document.querySelectorAll('#nav button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');
+document.querySelectorAll('section').forEach(function(s){s.classList.remove('on')});$(b.dataset.t).classList.add('on')}});
+var S=['08:00 Daily check-in sent','08:05 Reminder to Pak Cik Ahmad','08:20 Neighbour volunteer alerted (Puan Lina)','08:35 Guardhouse alerted with block and unit','08:40 Daughter informed with full context'];
+var M=[
+['s','SikLemau','Selamat pagi, Pak Cik Ahmad! Tap ✅ if you are okay today.'],
+['w','SikLemau','No reply yet. Gentle reminder: are you okay? Tap ✅ or send a voice note.'],
+['w','To Puan Lina (volunteer)','Pak Cik Ahmad has not checked in. Could you knock on Unit C-12-3? Reply “On my way” or “Can’t”.'],
+['r','To Guardhouse','Welfare check needed: Block C, Unit C-12-3. Volunteer did not respond in 15 min.'],
+['g','To Daughter (Siti)','Update: Pak Cik missed his 8:00 check-in. Neighbour and guardhouse have been contacted. Guard is on the way. We will keep you posted.']];
+var T=[];function render(n){
+$('steps').innerHTML=S.map(function(s,i){return '<div class="step '+(i<n-1?'done':i==n-1?'on':'')+'"><span class="dot"></span>'+s+'</div>'}).join('');
+$('chat').innerHTML=M.slice(0,n).map(function(m){return '<div class="m '+m[0]+'"><small>'+m[1]+'</small>'+m[2]+'</div>'}).join('')||'<div class="m s"><small>Ready</small>Press run to start the demo.</div>';
+$('chat').scrollTop=9999}
+function reset(){T.forEach(clearTimeout);T=[];render(0)}
+$('rst').onclick=reset;
+$('run').onclick=function(){reset();for(var i=1;i<=5;i++){(function(k){T.push(setTimeout(function(){render(k)},(k-1)*3000*0.8))})(i)}};
+render(0);
+var P=[['Aisyah & 3 others','Morning walk, Lake Track · 7:00','BM / English'],['Uncle Tan\u2019s badminton group','Community hall · Sat 8:00','中文 / English'],['Caregiver circle','Online + monthly meetup','BM / Tamil / English'],['Kavitha (walking buddy)','Park loop · 6:30 pm','Tamil / English']];
+$('buddies').innerHTML=P.map(function(p,i){return '<div class="b"><div><b>'+p[0]+'</b><br><span class="sub">'+p[1]+' · '+p[2]+'</span></div><button class="btn" data-i="'+i+'">Join</button></div>'}).join('');
+document.querySelectorAll('#buddies .btn').forEach(function(b){b.onclick=function(){b.textContent='Joined ✓';b.classList.add('p')}});
+var R={eat:["You","I have RM15 for lunch. What can I eat?","SikLemau","Try a food-stall plate that follows Suku-Suku Separuh: half vegetables and fruit, a quarter rice, a quarter protein such as fish, egg or tofu. Ask for less rice if the portion is large, and swap the sweet drink for plain water or kurang manis. Cost is usually within your RM15 budget (illustrative)."],move:["You","I have 15 minutes and no equipment.","SikLemau","Good news: the lake track is shaded until 8:00 and air quality is good. Two neighbours are walking at 7:00. A brisk 15-minute loop with them, plus 2 minutes of warm-up and stretching. Join?"],mind:["You","I feel stressed and only have 5 minutes.","SikLemau","Let’s try box breathing: breathe in 4 seconds, hold 4, out 4, hold 4, for 5 rounds. Afterwards, tell me if you feel better. If you feel unsafe or very low, I can connect you to a person right away."]};
+document.querySelectorAll('[data-r]').forEach(function(b){b.onclick=function(){var r=R[b.dataset.r];$('dout').innerHTML='<div class="m s"><small>'+r[0]+'</small>'+r[1]+'</div><div class="m"><small>'+r[2]+'</small>'+r[3]+'</div>'}});
+var H=[['A',6],['B',9],['C',27],['D',8],['E',12],['F',7],['G',19],['H',10]];
+$('heat').innerHTML=H.map(function(h){var c=h[1]>20?'#f28b82':h[1]>14?'#fbd36b':'#8fdcb6';return '<div class="cell" style="background:'+c+'">Block '+h[0]+'<small>'+h[1]+' min</small></div>'}).join('');
+$('rec').innerHTML=['<b>Block C:</b> slow responses among seniors. Start a weekly community programme.','<b>Main walking route:</b> add shade and 2 benches near the lake track.','<b>Park B path:</b> 3 lights reported broken. Fix this week.'].map(function(t){return '<div class="b">'+t+'</div>'}).join('');
+$('walk').innerHTML=[['Week 1',40],['Week 2',55],['Week 3',68],['Week 4',82]].map(function(w){return '<div style="margin:6px 0">'+w[0]+' <div class="bar"><i style="width:'+w[1]+'%"></i></div></div>'}).join('');
+</script></body></html>
