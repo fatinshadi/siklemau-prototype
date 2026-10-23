@@ -1,6 +1,6 @@
 # SikLemau: Township Health Agent
 
-**Sik lemau, sik mau lemau.** SikLemau is Sarawak Malay for "not weak".
+**Sik lemau, sik mau lemau.** SikLemau is Sarawakian Malay for "not weak".
 
 Entry for the Sime Darby Property University Hackathon 2026 (People track), Team Alpha-5.
 
