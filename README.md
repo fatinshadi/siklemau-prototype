@@ -3,6 +3,8 @@
 **Sik lemau, sik mau lemau.** SikLemau is Sarawakian Malay for "not weak".
 
 Entry for the Sime Darby Property University Hackathon 2026 (People track), Team Alpha-5.
+**Project Pitch Deck (PDF):** [View Pitch Deck](./docs/SikLemau-PitchDeck.pdf)
+
 
 ## What it is
 An AI health agent that uses the township itself as the health system. It checks on residents, escalates when something is wrong, supports everyday habits (Eat, Move, Mind), connects neighbours through shared health goals, and gives the township team anonymised insights.
