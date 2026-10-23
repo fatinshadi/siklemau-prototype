@@ -40,7 +40,7 @@ No diagnosis. Red flags go to 999 advice. Every contact in a circle is opt-in an
 ## Team
 Alpha-5 from UNIMAS: 
 1. Fatin Shadi
-2. Melanie Bernard
-3. Charmaine Toh
-4. Shaneryn Samson
-5. Jawa Denis
+2. Melanie Bernida Bernard
+3. Charmaine Zafira Toh
+4. Shaneryn Shanon Samson
+5. Jawa Jubin Denis
