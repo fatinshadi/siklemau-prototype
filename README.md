@@ -36,7 +36,7 @@ docs/             pitch deck
 No diagnosis. Red flags go to 999 advice. Every contact in a circle is opt-in and revocable. Designed for PDPA, with anonymised aggregation for insights. This prototype uses test accounts and synthetic data only. The bot token and Gemini key are read from environment variables and never stored in the repo.
 
 ## Team
-Alpha-5:
+Alpha-5 from UNIMAS: 
 1. Fatin Shadi
 2. Melanie Bernard
 3. Charmaine Toh
